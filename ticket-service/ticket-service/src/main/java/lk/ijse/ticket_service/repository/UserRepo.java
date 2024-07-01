@@ -1,10 +1,11 @@
-package lk.ijse.gdse.userservice.repository;/*
+package lk.ijse.ticket_service.repository;/*
     this application is copyright protected
     Author : kumara
-    Date : 6/30/2024
+    Date : 7/1/2024
 */
 
-import lk.ijse.gdse.userservice.entity.User;
+
+import lk.ijse.ticket_service.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<User,String> {

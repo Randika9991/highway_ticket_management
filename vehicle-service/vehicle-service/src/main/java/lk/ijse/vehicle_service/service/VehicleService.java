@@ -24,7 +24,6 @@ public class VehicleService {
     private UserRepo userRepo;
 
     public Vehicle registerVehicle(Vehicle vehicle) {
-
         try {
             User owner = userRepo.findById(vehicle.getOwner().getUserName())
                     .orElseThrow(() -> new IllegalArgumentException("User not found"));
@@ -34,7 +33,6 @@ public class VehicleService {
         } catch (Exception e) {
             throw new RuntimeException("Error registering vehicle: " + e.getMessage(), e);
         }
-
     }
 
     public Vehicle getVehicle(Long id) {
@@ -51,7 +49,6 @@ public class VehicleService {
             existingVehicle.setLicensePlate(vehicle.getLicensePlate());
             existingVehicle.setMake(vehicle.getMake());
             existingVehicle.setModel(vehicle.getModel());
-
             User owner = userRepo.findById(vehicle.getOwner().getUserName())
                     .orElseThrow(() -> new IllegalArgumentException("User not found"));
             existingVehicle.setOwner(owner);

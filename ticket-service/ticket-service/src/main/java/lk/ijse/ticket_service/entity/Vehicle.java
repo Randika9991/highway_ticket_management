@@ -1,9 +1,7 @@
-package lk.ijse.gdse.userservice.entity;
-
-/*
+package lk.ijse.ticket_service.entity;/*
     this application is copyright protected
     Author : kumara
-    Date : 6/28/2024
+    Date : 7/1/2024
 */
 
 import jakarta.persistence.*;

@@ -1,5 +1,10 @@
-package lk.ijse.gdse.ticketservice.dto;
+package lk.ijse.ticket_service.entity;/*
+    this application is copyright protected
+    Author : kumara
+    Date : 6/30/2024
+*/
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -7,13 +12,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
 
+@Entity
+public class User {
     @NotEmpty(message = "Username is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @Id
     private String userName;
 
     @NotEmpty(message = "Email is required")
@@ -23,4 +33,5 @@ public class UserDTO {
     @NotEmpty(message = "Password is required")
     @Size(min = 4, message = "Password must be at least 4 characters")
     private String password;
+
 }
