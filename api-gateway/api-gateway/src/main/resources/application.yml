@@ -11,10 +11,10 @@ spring:
             uri: lb://VEHICLE-SERVICE
             predicates:
               - Path=/api/v1/vehicle/**
-#          - id: ITEM-SERVICE
-#            uri: lb://ITEM-SERVICE
-#            predicates:
-#              - Path=/api/v1/item/**
+          - id: USER-SERVICE
+            uri: lb://USER-SERVICE
+            predicates:
+              - Path=/api/v1/user/**
 
 eureka:
   client:
