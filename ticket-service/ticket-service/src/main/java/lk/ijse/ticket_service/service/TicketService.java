@@ -5,6 +5,8 @@ package lk.ijse.ticket_service.service;/*
 */
 
 import lk.ijse.ticket_service.entity.Ticket;
+import lk.ijse.ticket_service.entity.User;
+import lk.ijse.ticket_service.entity.Vehicle;
 import lk.ijse.ticket_service.repository.TicketRepo;
 import lk.ijse.ticket_service.repository.UserRepo;
 import lk.ijse.ticket_service.repository.VehicleRepository;
@@ -24,8 +26,26 @@ public class TicketService {
     @Autowired
     private UserRepo userRepo;
 
-    public Ticket saveTicket(Ticket user) {
-        return ticketRepo.save(user);
+    public Ticket saveTicket(Ticket ticket) {
+
+        try {
+            User owner = userRepo.findById(ticket.getUserName().getUserName())
+                    .orElseThrow(() -> {
+                        System.out.println("User not found");
+                        return new IllegalArgumentException("User not found");
+                    });
+            ticket.setUserName(owner);
+
+            Vehicle vehicleId = vehicleRepository.findById(ticket.getId().getId()).orElseThrow(() -> {
+                System.out.println("Vehicle not found");
+                return new IllegalArgumentException("Vehicle not found");
+            });
+            ticket.setId(vehicleId);
+
+            return ticketRepo.save(ticket);
+        } catch (Exception e) {
+            throw new RuntimeException("Error registering vehicle: " + e.getMessage(), e);
+        }
     }
 
     public Ticket getTicket(Long id) {
@@ -37,18 +57,36 @@ public class TicketService {
     }
 
     public Ticket updateTicket(Long id, Ticket ticket) {
-        Ticket existingTicket = ticketRepo.findById(id).orElse(null);
-        if (existingTicket != null) {
-            existingTicket.setTicketId(ticket.getTicketId());
-            existingTicket.setId(ticket.getId());
+        try {
+            Ticket existingTicket = ticketRepo.findById(id).orElseThrow(() -> {
+                System.out.println("Ticket not found");
+                return new IllegalArgumentException("Ticket not found");
+            });
+
+            User owner = userRepo.findById(ticket.getUserName().getUserName())
+                    .orElseThrow(() -> {
+                        System.out.println("User not found");
+                        return new IllegalArgumentException("User not found");
+                    });
+            existingTicket.setUserName(owner);
+
+            Vehicle vehicle = vehicleRepository.findById(ticket.getId().getId()).orElseThrow(() -> {
+                System.out.println("Vehicle not found");
+                return new IllegalArgumentException("Vehicle not found");
+            });
+            existingTicket.setId(vehicle);
+
             existingTicket.setDate(ticket.getDate());
             existingTicket.setTime(ticket.getTime());
             existingTicket.setAmount(ticket.getAmount());
             existingTicket.setEntryPoint(ticket.getEntryPoint());
             existingTicket.setExitPoint(ticket.getExitPoint());
+
             return ticketRepo.save(existingTicket);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating ticket: " + e.getMessage(), e);
         }
-        return null;
     }
 
     public void deleteTicket(Long id) {
