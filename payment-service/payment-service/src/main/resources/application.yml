@@ -1,0 +1,24 @@
+#spring:
+#  application:
+#    name: customer-service
+#  config:
+#      import: "optional:configserver:http://localhost:8088"
+
+
+spring:
+  application:
+    name: PAYMENT-SERVICE
+  datasource:
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/microservice-test?createDatabaseIfNotExist=true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+  config:
+    import: "optional:configserver:http://localhost:8088"

@@ -7,7 +7,6 @@ package lk.ijse.ticket_service.controller;/*
 import lk.ijse.ticket_service.entity.Ticket;
 import lk.ijse.ticket_service.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +29,15 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping
-    public ResponseEntity<Ticket> registerTicket(@RequestBody Ticket ticket) {
-        try {
-            Ticket savedTicket = ticketService.saveTicket(ticket);
-            return new ResponseEntity<>(savedTicket, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public boolean registerTicket() {
+        System.out.println("ticker invoke");
+//        try {
+//            Ticket savedTicket = ticketService.saveTicket(ticket);
+//            return new ResponseEntity<>(savedTicket, HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+        return true;
     }
 
     @GetMapping("/{id}")

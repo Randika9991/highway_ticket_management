@@ -18,6 +18,10 @@ spring:
           - id: TICKET-SERVICE
             uri: lb://TICKET-SERVICE
             predicates:
+              - Path=/api/v1/payment/**
+          - id: PAYMENT-SERVICE
+            uri: lb://PAYMENT-SERVICE
+            predicates:
               - Path=/api/v1/ticket/**
 
 eureka:
