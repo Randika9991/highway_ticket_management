@@ -5,6 +5,7 @@ package lk.ijse.ticket_service.entity;/*
 */
 
 import jakarta.persistence.*;
+import lk.ijse.ticket_service.service.util.TicketStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,7 @@ public class Ticket {
     private String amount;
     private String entryPoint;
     private String exitPoint;
+
+    @Enumerated(EnumType.STRING)
+    private TicketStatus status;
 }

@@ -4,12 +4,14 @@ package lk.ijse.ticket_service.service;/*
     Date : 7/1/2024
 */
 
+import jakarta.ws.rs.NotFoundException;
 import lk.ijse.ticket_service.entity.Ticket;
 import lk.ijse.ticket_service.entity.User;
 import lk.ijse.ticket_service.entity.Vehicle;
 import lk.ijse.ticket_service.repository.TicketRepo;
 import lk.ijse.ticket_service.repository.UserRepo;
 import lk.ijse.ticket_service.repository.VehicleRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class TicketService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private ModelMapper mapper;
 
     @Autowired
     private UserRepo userRepo;
@@ -49,7 +54,10 @@ public class TicketService {
     }
 
     public Ticket getTicket(Long id) {
-        return ticketRepo.findById(id).orElse(null);
+        if (!ticketRepo.existsById(id)){
+            throw new NotFoundException("Ticket ID does not exists!");
+        }
+        return mapper.map(ticketRepo.findById(id), Ticket.class);
     }
 
     public List<Ticket> getAllTicket() {

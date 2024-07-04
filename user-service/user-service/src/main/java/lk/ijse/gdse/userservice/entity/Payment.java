@@ -1,8 +1,9 @@
-package lk.ijse.payment_service.entity;/*
+package lk.ijse.gdse.userservice.entity;/*
     this application is copyright protected
     Author : kumara
-    Date : 7/2/2024
+    Date : 7/3/2024
 */
+
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

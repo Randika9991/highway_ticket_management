@@ -1,4 +1,4 @@
-package lk.ijse.payment_service.entity;/*
+package lk.ijse.ticket_service.entity;/*
     this application is copyright protected
     Author : kumara
     Date : 7/2/2024
@@ -27,5 +27,6 @@ public class Payment {
 
     private String amount;
     private String status; // Pending, Completed, Failed, etc.
+
 
 }

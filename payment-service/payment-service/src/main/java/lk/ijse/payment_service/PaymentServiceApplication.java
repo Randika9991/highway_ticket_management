@@ -1,5 +1,6 @@
 package lk.ijse.payment_service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -15,7 +16,13 @@ public class PaymentServiceApplication {
 	}
 
 	@Bean
-	public RestTemplate restTemplate() {
+	public ModelMapper mapper(){
+		return new ModelMapper();
+	}
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate restTemplate(){
 		return new RestTemplate();
 	}
 }
